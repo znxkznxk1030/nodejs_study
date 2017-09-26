@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+        <head>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+            <style>
+                html,
+                body,
+                #viewDiv {
+                    padding: 0;
+                    margin: 0;
+                    height: 100%;
+                    width: 100%;
+                }
+            </style>
+            <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+            <!-- <script src="/socket.io/socket.io.js"></script> -->
+
+            <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+            <script src="https://js.arcgis.com/4.4/"></script>
+
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoS2zINT9r4535z2ClILjMK5V1Hk1cfsw"></script>
+            <script>
+                $(document).ready(function (){
+                        function setMarker(latitude, longtitude){
+                                var marker = new google.maps.Marker({
+                                        position: new google.maps.LatLng(latitude, longtitude),
+                                        map: map
+                                });
+                        }
+
+                        var name = prompt('');
+                        var socket = io.connect();
+
+                        socket.emit('join', name);
+
+                        var temp = document.getElementById('map');
+                        var map = new google.maps.Map(temp, {
+                            zoom: 19,
+                            center: new google.maps.LatLng(37.504156099999996, 127.044828),
+                            mapTypeId: google.maps.MapTypeId.ROADMAP,
+                            styles:[
+                                        { elementType: 'geometry', styler:[{color:'#242f3e'}]}
+                                ]
+                        });
+
+                       $.getJSON('/showdata', { name: name }, function (data){
+                                $.each(data, function(index, item){
+                                        setMarker(item.latitude, item.longitude);
+                                });
+                        });
+                });
+37.5407277,127.0706383
+37.5572321,127.0431332
+37.5572114,126.9752824
+37.5415673,127.0730467
+        </script> -->
+
+
+            <script>
+
+                require([
+                    "esri/Map",
+                    "esri/views/MapView",
+                    "dojo/domReady!"
+                ], function(Map, MapView) {
+
+                    var map = new Map({
+                        basemap: "streets"
+                    });
+
+                    var view = new MapView({
+                        container: "viewDiv" ,
+                        map: map,
+                        zoom: 19,
+                        center: [127.0730467, 37.5415673] // longitude, latitude
+                    });
+
+                });
+            </script>
+        </head>
+        <body>
+
+            <!-- <div id="map"> -->
+            <div id="viewDiv">
+            </div>
+        </body>
+</html>

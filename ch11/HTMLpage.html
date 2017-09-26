@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="/socket.io/socket.io.js">
+        </script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script>
+                window.onload = function(){
+                        
+                        var room = prompt();
+                        var socket = io.connect();
+                        
+                        socket.emit('join', room);
+                                         
+                        socket.on('message', function (data){
+                            $('<p>' + data + '</p>').appendTo('body');
+                        });
+                        
+                        document.getElementById('button').onclick = function () {
+
+                            data = document.getElementById('text').value;
+                            socket.emit('message', data);
+                        };
+                };
+        </script>
+    </head>
+    <body>
+        <input type="text" id="text"/>
+        <button id="button">EMIT</button>
+    </body>
+</html>
